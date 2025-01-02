@@ -71,7 +71,7 @@ body {
     left: 32%;
     background-color: rgb(236, 236, 236);
     width: 700px;
-    height: 600px;
+    height: 660px;
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
     padding: 50px;
@@ -127,6 +127,19 @@ body {
             }
         }
     }
+
+    .closeButton{
+        width: 50px;
+        height: 50px;
+        margin-top: 30px;
+       color: #A71C36;
+       cursor: pointer;
+       transition: all 0.2s ease-in-out;
+
+       &:hover{
+        filter: drop-shadow( 1px 3px red);
+       }
+    }
 }
 
 .footer {
@@ -178,4 +191,6 @@ body {
             }
         }
     }
+
+    
 }
