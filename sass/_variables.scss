@@ -1,6 +1,6 @@
 @mixin buttonSimple {
     all: unset;
-    width: 320px;
+    width: 400px;
     color: white;
     border-radius: 50px;
     border: 1px solid white;
@@ -18,7 +18,7 @@
 
 @mixin buttonMinimalist {
     all: unset;
-    width: 320px;
+    width: 400px;
     color: black;
     background-color: white;
     border-radius: 50px;
@@ -34,3 +34,12 @@
         border: 1px solid white;
     }
 }
+
+@mixin text{
+    color: white;
+    text-align: center;
+    font-size: 40px;
+    text-transform: capitalize;
+    font-weight: 400;
+}
+
