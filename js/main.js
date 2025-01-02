@@ -1,20 +1,22 @@
-const database = []
-const modal = document.querySelector("#msg")
+const database = [];
+const modal = document.querySelector("#msg");
+document.addEventListener("DOMContentLoaded", () => {
+  AOS.init();
+});
 
-function notification(text,typeOfMsg){
+function notification(text, typeOfMsg) {
   Swal.fire({
     title: text,
     icon: typeOfMsg,
-    draggable: true
-  })
+    draggable: true,
+  });
 }
 
 function input() {
-  const signUp = document.querySelector("#signUp")
+  const signUp = document.querySelector("#signUp");
   signUp.addEventListener("click", () => {
-
     modal.innerHTML = `
-      <div class="ContainerMsg">
+      <div class="ContainerMsg" data-aos="flip-left">
         <img class="closeButton" id="buttonClose" src="img/cerrar-ventana.png" alt="Cerrar">
         <h1 class="titleForm">Create your account</h1>
         <form class="formSignUp">
@@ -41,52 +43,56 @@ function input() {
           <button id="signInForm">Sign In</button>
         </div>
       </div>
-    `
+    `;
 
-    const buttonClose = document.querySelector("#buttonClose")
+    AOS.refresh();
+
+    const buttonClose = document.querySelector("#buttonClose");
     buttonClose.addEventListener("click", () => {
-      modal.innerHTML = "";
-    })
+      const containerMsg = document.querySelector(".ContainerMsg");
 
-    const signUpForm = document.querySelector(".formSignUp")
+      containerMsg.setAttribute("data-aos", "fade-out");
+
+      setTimeout(() => {
+        modal.innerHTML = "";
+        AOS.refresh();
+      }, 500);
+    });
+
+    const signUpForm = document.querySelector(".formSignUp");
     signUpForm.addEventListener("submit", (e) => {
-      e.preventDefault()
-      uploadDataUsers()
-    })
-  })
+      e.preventDefault();
+      uploadDataUsers();
+    });
+  });
 }
 
 input();
 
 function uploadDataUsers() {
-  const name = document.querySelector("#nameIn").value.trim()
-  const username = document.querySelector("#userIn").value.trim()
-  const email = document.querySelector("#emailIn").value.trim()
-  const password = document.querySelector("#passwordIn").value.trim()
-
+  const name = document.querySelector("#nameIn").value.trim();
+  const username = document.querySelector("#userIn").value.trim();
+  const email = document.querySelector("#emailIn").value.trim();
+  const password = document.querySelector("#passwordIn").value.trim();
 
   if (name && username && email && password) {
-  
-    const user = { name, username, email, password }
+    const user = { name, username, email, password };
 
     const userData = {
-       nameU: name, 
-       usernameU: username,
-       emailU: email,
-       passwordU: password
-    }
+      nameU: name,
+      usernameU: username,
+      emailU: email,
+      passwordU: password,
+    };
 
-    JSON.stringify(localStorage.setItem("userData", userData))
-    
-    database.push(user)
-    
-    notification("Your account has been created successfully", "success")
-  
-    modal.innerHTML = ""
+    JSON.stringify(localStorage.setItem("userData", userData));
+
+    database.push(user);
+
+    notification("Your account has been created successfully", "success");
+
+    modal.innerHTML = "";
   } else {
-   notification("Please!, Complete all inputs before sending")
+    notification("Please!, Complete all inputs before sending");
   }
 }
-
-
-
